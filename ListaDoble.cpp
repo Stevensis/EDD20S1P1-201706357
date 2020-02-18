@@ -7,17 +7,22 @@
 #include "Nodo.cpp"
 using namespace std;
 
-void ListaDoble::InsertarPrimero(char c){
+void ListaDoble::InsertarPrimero(char c, Nodo* n){
     Nodo* aux = new Nodo(c);
     if(primero==NULL){
         //Lista vacia
         primero = aux;
         ultimo = aux;
-    }else{
+    }else if(n== primero){
         //Añade al primerio de la lista
         aux->siguiente=primero;
         primero->atras=aux;
         primero=aux;
+    }else{
+        n->atras->siguiente = aux;
+        aux->atras = n->atras;
+        n->atras =aux;
+        aux->siguiente = n;
     }
 }
 

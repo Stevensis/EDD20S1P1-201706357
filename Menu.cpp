@@ -81,7 +81,7 @@ void Menu::menu(){
             move(dim_y,dim_x);
             break;
             default:
-            listaDoble->InsertarPrimero(ca);
+            listaDoble->InsertarPrimero(ca,listaDoble->primero);
             erase();
             listaDoble->VerL();
             break;

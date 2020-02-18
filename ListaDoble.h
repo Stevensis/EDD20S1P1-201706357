@@ -7,7 +7,7 @@ class ListaDoble{
 public:
     Nodo* primero = NULL;
     Nodo* ultimo = NULL;
-    void InsertarPrimero(char c);
+    void InsertarPrimero(char c,Nodo* n);
     void EliminarUltimo();
     void Buscar(string s);
     void VerL();
