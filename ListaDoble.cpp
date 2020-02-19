@@ -1,9 +1,11 @@
 #include "ListaDoble.h"
-
+#include <bits/stdc++.h>
+#include <utility>
 #include <cstdlib>
 #include <iostream>
 #include <string>
 #include "ListaDoble.h"
+#include <windows.h>
 
 using namespace std;
 
@@ -61,4 +63,19 @@ bool ListaDoble::ExisteElNodo(int x, int y){
             }
             temporal = temporal->atras;
         }
+}
+
+void ListaDoble::printList(string nombre) {
+    ofstream grafica;
+    grafica.open("Prueba.dot", ios::out);
+    grafica << "digraph {" << endl << "padre -> hijo; padre -> hija;" << endl;
+    grafica << "}";
+
+    grafica.close();
+
+    string creacion = "dot -Tjpg " + nombre + ".dot -o " + nombre + ".jpg";
+    system(creacion.c_str());
+    string title = nombre  + ".jpg";
+    ShellExecute(NULL, "open", title.c_str(), NULL, NULL, SW_SHOWNORMAL);
+
 }

@@ -10,6 +10,7 @@
 #include <panel.h>
 #include <stdlib.h>
 #include "Graficador.cpp"
+#include <windows.h>
 using namespace std;
 char ca;
 ListaDoble* listaDoble = new ListaDoble();
@@ -72,7 +73,9 @@ void Menu::menu(){
             move(dim_y,dim_x);
             break;
             case ctrl('c'):
-                graficador->graficarListaDoble();
+                listaDoble->printList("Prueba");
+            break;
+            case ctrl('i'):
             break;
             case 8:
             listaDoble->EliminarUltimo();
