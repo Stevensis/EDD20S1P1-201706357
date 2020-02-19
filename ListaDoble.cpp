@@ -6,7 +6,6 @@
 #include <string>
 #include "ListaDoble.h"
 #include <windows.h>
-
 using namespace std;
 
 void ListaDoble::InsertarPrimero(char c, Nodo* n){
@@ -34,10 +33,12 @@ void ListaDoble::InsertarPrimero(char c, Nodo* n){
 }
 
 void ListaDoble::VerL(){
+    int contador=0;
     Nodo* temporal = ultimo;
     while(temporal !=NULL){
             getyx(stdscr,temporal->y,temporal->x);
-           addch(temporal->c); //Va añadir a la pantalla caracter por caracter
+            temporal->id=contador; contador++;
+            addch(temporal->c); //Va añadir a la pantalla caracter por caracter
             temporal = temporal->atras;
         }
 }
@@ -66,9 +67,30 @@ bool ListaDoble::ExisteElNodo(int x, int y){
 }
 
 void ListaDoble::printList(string nombre) {
+    std::string prueba="";
     ofstream grafica;
     grafica.open("Prueba.dot", ios::out);
-    grafica << "digraph {" << endl << "padre -> hijo; padre -> hija;" << endl;
+    grafica << "digraph {";
+    Nodo* temporal = ultimo;
+    while(temporal !=NULL){
+            char a = temporal->id;
+         prueba+= "\"idNodo"; prueba+=a; prueba+="\" [label="; prueba+="\"";prueba+=temporal->c;prueba+="\"];\n";
+            temporal = temporal->atras;
+        }
+    temporal = ultimo;
+    while(temporal !=primero){
+    prueba+= "idNodo"; prueba+=temporal->id;
+    prueba+= "->";
+    prueba+= "idNodo"; prueba+= temporal->atras->id;
+    prueba+= ";\n";
+
+    prueba+= "idNodo"; prueba+= temporal->atras->id;
+    prueba+= "->";
+    prueba+= "idNodo"; prueba+= temporal->atras->siguiente->id;
+    prueba+= ";\n";
+            temporal = temporal->atras;
+        }
+    grafica << prueba;
     grafica << "}";
 
     grafica.close();
