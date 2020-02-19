@@ -4,8 +4,10 @@
 #include <cstdlib>
 #include <iostream>
 #include <string>
+#include <curses.h>
 #include "ListaDoble.h"
 #include <windows.h>
+#include <sstream>
 using namespace std;
 
 void ListaDoble::InsertarPrimero(char c, Nodo* n){
@@ -67,29 +69,34 @@ bool ListaDoble::ExisteElNodo(int x, int y){
 }
 
 void ListaDoble::printList(string nombre) {
-    std::string prueba="";
+    string prueba="";
     ofstream grafica;
     grafica.open("Prueba.dot", ios::out);
     grafica << "digraph {";
     Nodo* temporal = ultimo;
     while(temporal !=NULL){
-            char a = temporal->id;
-         prueba+= "\"idNodo"; prueba+=a; prueba+="\" [label="; prueba+="\"";prueba+=temporal->c;prueba+="\"];\n";
+            int a = 1;
+         prueba+= "\"idNodo"; prueba+=to_string(temporal->id); prueba+="\" [label="; prueba+="\"";prueba+=temporal->c;prueba+="\"];\n";
             temporal = temporal->atras;
         }
     temporal = ultimo;
     while(temporal !=primero){
-    prueba+= "idNodo"; prueba+=temporal->id;
+    prueba+= "idNodo"; prueba+=to_string(temporal->id);
     prueba+= "->";
-    prueba+= "idNodo"; prueba+= temporal->atras->id;
+    prueba+= "idNodo"; prueba+=to_string( temporal->atras->id);
     prueba+= ";\n";
 
-    prueba+= "idNodo"; prueba+= temporal->atras->id;
+    prueba+= "idNodo"; prueba+=to_string( temporal->atras->id);
     prueba+= "->";
-    prueba+= "idNodo"; prueba+= temporal->atras->siguiente->id;
+    prueba+= "idNodo"; prueba+=to_string( temporal->atras->siguiente->id);
     prueba+= ";\n";
             temporal = temporal->atras;
         }
+    temporal = primero;
+    prueba+= "idNodo"; prueba+=to_string(temporal->id);
+    prueba+= "->";
+    prueba+= "NULL";
+    prueba+= ";\n";
     grafica << prueba;
     grafica << "}";
 

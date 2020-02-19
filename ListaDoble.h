@@ -2,6 +2,7 @@
 #define LISTADOBLE_H_INCLUDED
 #include "Nodo.h"
 #include <string>
+#include <curses.h>
 using namespace std;
 class ListaDoble{
 public:
