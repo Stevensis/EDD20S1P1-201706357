@@ -11,6 +11,9 @@ public:
     void EliminarUltimo();
     void Buscar(string s);
     void VerL();
+    //Cuando se va querrer añadir al inicio de la lista el cursor esta en una posicion donde no existe nodo
+    //Entonces si mando una posicion del cursor y no existe nodo en esa posicion me va devolver falso y en otro metodo voy a añadir al incio de la lista
+    bool ExisteElNodo(int x, int y);
 };
 
 

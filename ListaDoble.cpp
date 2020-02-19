@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 #include "ListaDoble.h"
-#include "Nodo.cpp"
+
 using namespace std;
 
 void ListaDoble::InsertarPrimero(char c, Nodo* n){
@@ -18,7 +18,12 @@ void ListaDoble::InsertarPrimero(char c, Nodo* n){
         aux->siguiente=primero;
         primero->atras=aux;
         primero=aux;
-    }else{
+    }else if(n==ultimo){
+        aux->atras = ultimo;
+        ultimo->siguiente = aux;
+        ultimo=aux;
+    }
+    else{
         n->atras->siguiente = aux;
         aux->atras = n->atras;
         n->atras =aux;
@@ -28,10 +33,9 @@ void ListaDoble::InsertarPrimero(char c, Nodo* n){
 
 void ListaDoble::VerL(){
     Nodo* temporal = ultimo;
-  //  cout<<""<<endl;
     while(temporal !=NULL){
-           // cout<< temporal->c;
-           addch(temporal->c);
+            getyx(stdscr,temporal->y,temporal->x);
+           addch(temporal->c); //Va añadir a la pantalla caracter por caracter
             temporal = temporal->atras;
         }
 }
@@ -47,4 +51,14 @@ void ListaDoble::EliminarUltimo(){
         primero=primero->siguiente;
         primero->atras=NULL;
     }
+}
+
+bool ListaDoble::ExisteElNodo(int x, int y){
+    Nodo* temporal = ultimo;
+    while(temporal !=NULL){
+            if(x== temporal->x && y==temporal->y){
+                return true;
+            }
+            temporal = temporal->atras;
+        }
 }

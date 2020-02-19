@@ -7,6 +7,7 @@
 using namespace std;
 class Nodo{
 public:
+    int x,y;
     char c;
     Nodo* siguiente=NULL;
     Nodo* atras=NULL;

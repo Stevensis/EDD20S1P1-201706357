@@ -15,10 +15,11 @@ char ca;
 ListaDoble* listaDoble = new ListaDoble();
 Graficador* graficador = new Graficador();
 bool verificar=true; //Boleano para el ciclo que va contener el recibimiento de caracteres
+int dim_x , dim_y;
 
 void Menu::menu(){
     initscr();
-    int dim_x , dim_y; // Estas variables solo me ayudaran a almacenar las dimensiones
+     // Estas variables solo me ayudaran a almacenar las dimensiones
      int ica;
      // Obtengo las dimensiones
 
@@ -65,6 +66,8 @@ void Menu::menu(){
                 pintarVentana();
             break;
             case KEY_LEFT:
+                cout<<"\n Izquierda";
+                getyx(stdscr,dim_y,dim_x);
             dim_x-=1;
             move(dim_y,dim_x);
             break;
@@ -77,12 +80,14 @@ void Menu::menu(){
             listaDoble->VerL();
             break;
             case KEY_RIGHT:
+                cout<<"\n Derecha";
             dim_x+=1;
             move(dim_y,dim_x);
             break;
             default:
-            listaDoble->InsertarPrimero(ca,listaDoble->primero);
+            getyx(stdscr,dim_y,dim_x);
             erase();
+            listaDoble->InsertarPrimero(ca,getNodoBuscado(dim_x,dim_y));
             listaDoble->VerL();
             break;
     }
@@ -99,6 +104,26 @@ void Menu::menu(){
 }
 void Menu::pintarVentana(){
 
+}
+
+Nodo* Menu::getNodoBuscado(int x, int y){
+    if(listaDoble->primero==NULL){
+        return NULL;
+    }
+    if(!listaDoble->ExisteElNodo(x,y)){
+        return listaDoble->primero;
+    }
+    if(x==0 && y==0){
+        return listaDoble->ultimo;
+    }else{
+        Nodo* temporal = listaDoble->ultimo;
+        while(temporal !=NULL){
+            if(x== temporal->x && y==temporal->y){
+                return temporal->siguiente;
+            }
+            temporal = temporal->atras;
+        }
+    }
 }
 
 
